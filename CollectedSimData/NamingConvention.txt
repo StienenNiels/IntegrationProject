@@ -1,0 +1,21 @@
+Month-Day-SamplingTime-Experiment-ActuationType-Amplitude-Frequency-Run
+Sampling Time:
+2 digits
+Experiment:
+d: down position, pendulum locked
+f: Free to move
+a: falling from 45
+b: falling from 90
+ActuationType:
+b: Square
+s: Sine
+n: No actuation
+Amplitude:
+2 digits
+Frequency:
+2 digits (Hz)
+Run:
+2 digits
+
+Example:
+mo_da_h05_Ef_As00H05_R01
