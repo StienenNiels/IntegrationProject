@@ -1,3 +1,4 @@
+Every name starts with D as names cannot start with a number
 Month-Day-SamplingTime-Experiment-ActuationType-Amplitude-Frequency-Run
 Sampling Time:
 2 digits
@@ -18,4 +19,4 @@ Run:
 2 digits
 
 Example:
-mo_da_h05_Ef_As00H05_R01
+Dmo_da_h05_Ef_As00H05_R01
