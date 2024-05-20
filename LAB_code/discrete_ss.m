@@ -26,6 +26,8 @@ B = jacobian(dx,u);
 A = double(subs(A,theta,pi));
 B = double(B);
 
+e = eig(A)
+
 sys = ss(A,B,[],[]);
 sysd = c2d(sys,h);
 
