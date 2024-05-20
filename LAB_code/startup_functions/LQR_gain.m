@@ -10,12 +10,12 @@ Q = [w1*n1, 0, 0;
      0, w2*n2, 0;
      0, 0, w3*n3];
 R = 1e1;
-L = 10;
+L_roc = 10;
 
 roc = 0;
 
 if roc
-    [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L);
+    [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc);
     
     K_LQR = lqr(A,B,Q,R,M);
     disp("Yes, I've calculated the LQR gain...")
