@@ -1,7 +1,7 @@
 function loadSim()
     tic
-    addpath("CollectedSimData\");
-    folder = 'CollectedSimData';
+    addpath("../CollectedSimData\");
+    folder = '../CollectedSimData';
     % Get a list of all files in the folder
     files = dir(fullfile(folder, '*.mat'));
     % Iterate over each file
