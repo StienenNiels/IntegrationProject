@@ -16,7 +16,7 @@ K_tau = 0.0107;
 theta = x(1);
 theta_dot = x(2);
 omega = x(3);
-theta_ddot = -K1*(theta)-K2*theta_dot-K3*(theta_dot)-K_tau*(K4*u-K5*omega-K6*(omega));
+theta_ddot = -K1*sin(theta)-K2*theta_dot-K3*(theta_dot)-K_tau*(K4*u-K5*omega-K6*(omega));
 omega_dot = K4*u-K5*omega-K6*(omega);
 dx = [theta_dot; theta_ddot; omega_dot];
 end
