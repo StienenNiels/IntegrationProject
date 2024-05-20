@@ -1,4 +1,4 @@
-addpath("startup_functions\")
+addpath("LAB_functions\")
 
 hwinit
 discrete_ss
