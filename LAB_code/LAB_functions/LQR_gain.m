@@ -25,31 +25,36 @@ R = wu1*qu1;
 L_roc = ql1;
 
 % Calculate LQR gain
-if roc
-    [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc);
-    
+A = sys.A;
+B = sys.B;
+
+if roc && model_continuous
+    [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc,model_continuous);
     K_LQR = lqr(A,B,Q,R,M);
-    disp("Yes, I've calculated the LQR gain...")
-    disp(K_LQR)
+elseif roc && ~model_continuous
+    [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc,model_continuous);
+    K_LQR = dlqr(A,B,Q,R,M);
+elseif ~roc && model_continuous
+    K_LQR = [lqr(A,B,Q,R),0];
 else
-    K_LQR = lqr(A,B,Q,R);
-    disp("Yes, I've calculated the LQR gain...")
-    disp(K_LQR)
+    K_LQR = [dlqr(A,B,Q,R),0];
 end
 
-
 % Function taken from our MPC project
-function [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L)  
+function [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L,model_continuous)  
     % Augment the state with the previous control action
     % This allows us to formulate it as a standard LQR problem with cross
     % terms.
     % For reference look at exercise set 2, problem 5
-    % x is now 16 states being: [u v w phi theta psi p q r X_b Y_b Z_b Omega1 Omega2 Omega3 mu]
     n_x = size(A,1);
     n_u = size(B,2);
     
-    % Calculate terminal cost using the discrete algebraic Ricatti equation
-    P = idare(A,B,Q,R);
+    % Calculate terminal cost using the algebraic Ricatti equation
+    if model_continuous
+        P = icare(A,B,Q,R);
+    else
+        P = idare(A,B,Q,R);
+    end
     
     % Extend the system matrices
     A = [A, zeros(n_x,n_u);
