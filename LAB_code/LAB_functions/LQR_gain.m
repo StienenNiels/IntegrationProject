@@ -25,9 +25,6 @@ R = wu1*qu1;
 L_roc = ql1;
 
 % Calculate LQR gain
-A = sysd.A;
-B = sysd.B;
-
 if roc && model_continuous
     [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc,model_continuous);
     K_LQR = lqr(A,B,Q,R,M);
@@ -35,7 +32,10 @@ elseif roc && ~model_continuous
     [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc,model_continuous);
     K_LQR = dlqr(A,B,Q,R,M);
 elseif ~roc && model_continuous
-    K_LQR = [dlqr(A,B,Q,R),0]
+    % A = sysd.A;
+    % B = sysd.B;
+    % K_LQR = [dlqr(A,B,Q,R),0]
+    K_LQR = [lqr(A,B,Q,R),0]
 else
     K_LQR = [dlqr(A,B,Q,R),0]
 end

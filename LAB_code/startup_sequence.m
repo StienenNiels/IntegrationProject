@@ -4,10 +4,10 @@ clc
 addpath("LAB_functions\")
 
 % Linearization point (unstable equilibrium, top position)
-linearization_point = [0;0;0];
-initial_state = [-pi/2;0;0];
+linearization_point = [pi;0;0];
+% initial_state = [0;0;0];
 % Deviation for in model simulation
-lp_deviation = [pi/9;0;0]; % 20 degrees from equilibrium
+lp_deviation = [deg2rad(5);0;0]; % 20 degrees from equilibrium
 % Continuous or discrete observer and LQR gains
 model_continuous = true; % unstable for discrete in model
 
