@@ -11,10 +11,10 @@ wx3 = 1/250;
 wu1 = 1;
 
 % Penalization factors
-qx1 = 10;
-qx2 = 1;
+qx1 = 100;
+qx2 = 1e0;
 qx3 = 1e-2;
-qu1 = 1e1;
+qu1 = 1e2;
 ql1 = 10;
 
 % Q,R,L matrices
@@ -25,8 +25,8 @@ R = wu1*qu1;
 L_roc = ql1;
 
 % Calculate LQR gain
-A = sys.A;
-B = sys.B;
+A = sysd.A;
+B = sysd.B;
 
 if roc && model_continuous
     [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc,model_continuous);
@@ -35,9 +35,9 @@ elseif roc && ~model_continuous
     [A,B,C,Q,R,M] = rate_change_pen(A,B,Q,R,L_roc,model_continuous);
     K_LQR = dlqr(A,B,Q,R,M);
 elseif ~roc && model_continuous
-    K_LQR = [lqr(A,B,Q,R),0];
+    K_LQR = [dlqr(A,B,Q,R),0]
 else
-    K_LQR = [dlqr(A,B,Q,R),0];
+    K_LQR = [dlqr(A,B,Q,R),0]
 end
 
 % Function taken from our MPC project
