@@ -7,7 +7,7 @@ addpath("LAB_functions\")
 linearization_point = [pi;0;0];
 % initial_state = [0;0;0];
 % Deviation for in model simulation
-lp_deviation = [deg2rad((rand()-0.5)*50+180);0;0] % 20 degrees from equilibrium
+lp_deviation = [deg2rad((rand()-0.5)*50+180);0;0]; % 20 degrees from equilibrium
 % Continuous or discrete observer and LQR gains
 model_continuous = true; % unstable for discrete in model
 
