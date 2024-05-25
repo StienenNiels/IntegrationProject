@@ -22,6 +22,7 @@ hwinit
 generate_state_space
 LQR_gain
 reduced_observer
+MPC_controller
 
 % Just to be sure
 disp("Yes, I've calculated whatever you wanted...")
