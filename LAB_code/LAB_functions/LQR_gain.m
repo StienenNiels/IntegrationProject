@@ -11,10 +11,10 @@ wx3 = 1/250;
 wu1 = 1;
 
 % Penalization factors
-qx1 = 100;
+qx1 = 20;
 qx2 = 1e0;
 qx3 = 1e-2;
-qu1 = 1e2;
+qu1 = 5e3;
 ql1 = 10;
 
 % Q,R,L matrices
