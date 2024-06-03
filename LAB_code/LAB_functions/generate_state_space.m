@@ -28,7 +28,7 @@ A = double(subs(A,[theta,theta_dot,omega],linearization_point'));
 B = double(B);
 
 % Generate state spaces
-sysc = ss(A,B,[],[]);
+sysc = ss(A,B,eye(3),[]);
 sysd = c2d(sysc,h);
 if model_continuous
     sys = sysc;

@@ -32,9 +32,15 @@ G = A21-L*A11+F*L;
 pole_ctH = [-10,-60,-50];
 
 C = [1,0,0;0,0,1];
-pole_d = exp(pole_ctH*h);
-% sys.A(1,1) = 1;
-H_nlobs = place(sysc.A',C',pole_ctH)';
+
+if model_continuous
+    H_nlobs = place(sys.A',C',pole_ctH)';
+else
+    pole_d = exp(pole_ctH*h);
+    H_nlobs = place(sys.A',C',pole_d)';
+end
+
+
 
 
 
