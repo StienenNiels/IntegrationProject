@@ -37,7 +37,7 @@ if model_continuous
     H_nlobs = place(sys.A',C',pole_ctH)';
 else
     pole_d = exp(pole_ctH*h);
-    H_nlobs = place(sys.A',C',pole_d)'
+    H_nlobs = place(sys.A',C',pole_d)';
 end
 
 
