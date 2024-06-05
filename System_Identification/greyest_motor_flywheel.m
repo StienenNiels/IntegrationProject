@@ -55,6 +55,8 @@ opt.SearchOptions.StepTolerance = 1e-3;
 trk45 = clock;
 nlgrrk45 = nlgreyest(z, nlgrrk45, opt);   % Perform parameter estimation.
 trk45 = etime(clock, trk45);
+grid on
+
 figure(9999);
 
 compare(z, nlgrrk45, 1, ...
@@ -70,5 +72,6 @@ for i = 1:1
     figure(i),clf;
         compare(z, nlgrrk45, 1, ...
         compareOptions('InitialCondition', 'model'));
+    grid on
 end
 

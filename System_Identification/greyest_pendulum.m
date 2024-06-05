@@ -67,6 +67,7 @@ for i = 1:2
     figure(i),clf;
         compare(z, nlgrrk45, 1, ...
         compareOptions('InitialCondition', 'model'));
+        grid on
 end
 
 
@@ -99,7 +100,8 @@ nlgr = setpar(nlgr, 'Maximum', {inf inf inf});   % All parameters > 0.
 
 nlgr.SimulationOptions.Solver = 'ode45';     % Runge-Kutta 45.
 
-figure(1), clf;
+figure(3), clf;
 compare(z, nlgr, 1, ...
    compareOptions('InitialCondition', 'model'));
+grid on
 
