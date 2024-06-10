@@ -10,7 +10,7 @@ qx1 = 100;
 qx2 = 1e0;
 qx3 = 1e0;
 qu1 = 5e-4;
-L_LQR = 20;
+L_LQR = 40;
 
 % Q,R,L matrices
 Q = [wx1*qx1, 0, 0;
@@ -20,11 +20,13 @@ R = wu1*qu1;
 
 % Calculate LQR gain
 if model_continuous
-    K_LQR = lqr(sys.A,sys.B,Q,R);
+    x0 = [0;0;0];
+    [A_LQR,B_LQR,C_LQR,Q_LQR,R_LQR,M_LQR,P_LQR,x0] = rate_change_pen(sys.A,sys.B,Q,R,L_LQR,x0);
+    K_LQR = lqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR)
 else
     x0 = [0;0;0];
     [A_LQR,B_LQR,C_LQR,Q_LQR,R_LQR,M_LQR,P_LQR,x0] = rate_change_pen(sys.A,sys.B,Q,R,L_LQR,x0);
     % K_LQR = dlqr(sys.A,sys.B,Q,R);
-    K_LQR = dlqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR);
+    K_LQR = dlqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR)
 end
 

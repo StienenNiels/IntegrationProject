@@ -29,15 +29,15 @@ F = A22-L*A12;
 H = B2-L*B1;
 G = A21-L*A11+F*L;
 
-pole_ctH = [-10,-60,-50];
+pole_ctH = [-20,-25,-60];
 
 C = [1,0,0;0,0,1];
 
-if model_continuous
-    H_nlobs = place(sys.A',C',pole_ctH)';
+if observer_continuous
+    H_nlobs = place(sysc.A',C',pole_ctH)';
 else
     pole_d = exp(pole_ctH*h);
-    H_nlobs = place(sys.A',C',pole_d)';
+    H_nlobs = place(sysd.A',C',pole_d)';
 end
 
 
