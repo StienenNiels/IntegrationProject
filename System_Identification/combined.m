@@ -1,10 +1,10 @@
-function [dx, y] = combined(t,x,u,K_tau,varargin)
-K1 = 10.8975;
-K2 = 0.0393;
-K3 = 0.1051;
-K4 = 402;
-K5 = 0.9403;
-K6 = 1.7382;
+function [dx, y] = combined(t,x,u,K_tau,K1,K2,K3,K4,K5,K6,varargin)
+% K1 = 10.8975;
+% K2 = 0.0393;
+% K3 = 0.1051;
+% K4 = 402;
+% K5 = 0.9403;
+% K6 = 1.7382;
 theta = x(1);
 theta_dot = x(2);
 omega = x(3);
