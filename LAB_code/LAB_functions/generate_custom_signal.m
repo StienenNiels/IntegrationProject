@@ -25,9 +25,9 @@ function control_signal = generate_custom_signal(h, plot_bool)
     u_chirp = A*chirp(T3, 0.1, T3(end), 0.8, 'linear');
     
     % Combine signals
-    u(1:201) = u_sin;
-    u(401:601) = u_chirp;
-    u(801:1201) = u_sq;
+    u(1:10/h+1) = u_sin;
+    u(20/h+1:30/h+1) = u_chirp;
+    u(40/h+1:60/h+1) = u_sq;
     
     % Final signal
     control_signal = [T',u'];

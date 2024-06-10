@@ -18,7 +18,7 @@ model_continuous = false;
 hwinit
 
 % Custom signal generation
-% control_signal = generate_custom_signal(h, false);
+control_signal = generate_custom_signal(h, false);
 
 % Define linearized state space used for observer and LQR gains
 generate_state_space
