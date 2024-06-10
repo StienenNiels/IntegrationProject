@@ -15,6 +15,14 @@ K5 = 0.9442;
 K6 = 1.7125;
 K_tau = 0.0107;
 
+gains.K1 = K1;
+gains.K2 = K2;
+gains.K3 = K3;
+gains.K4 = K4;
+gains.K5 = K5;
+gains.K6 = K6;
+gains.K_tau = K_tau;
+
 % System equations
 theta_ddot = -K1*sin(theta)-K2*theta_dot-K3*(theta_dot)-K_tau*(K4*u-K5*omega-K6*(omega));
 omega_dot = K4*u-K5*omega-K6*(omega);

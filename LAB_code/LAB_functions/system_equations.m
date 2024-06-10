@@ -1,13 +1,13 @@
-function dx = system_equations(t,x,u)
+function dx = system_equations(t,x,u,gains)
 
 % Define constants
-K1 = 10.6608;
-K2 = 0.0487;
-K3 = 0.1031;
-K4 = 404.3827;
-K5 = 0.9442;
-K6 = 1.7125;
-K_tau = 0.0107;
+K1 = gains.K1;
+K2 = gains.K2;
+K3 = gains.K3;
+K4 = gains.K4;
+K5 = gains.K5;
+K6 = gains.K6;
+K_tau = gains.K_tau;
 
 % System equations
 theta = x(1);
