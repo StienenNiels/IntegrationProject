@@ -4,6 +4,9 @@ clc
 set(groot,'defaulttextinterpreter','latex');  
 set(groot, 'defaultAxesTickLabelInterpreter','latex');  
 set(groot, 'defaultLegendInterpreter','latex');
+set(groot, 'defaultAxesFontSize', 14); % Set default font size for axes
+set(groot, 'defaultTextFontSize', 14); % Set default font size for text
+set(groot, 'defaultLegendFontSize', 14); % Set default font size for legends
 
 addpath("..\Equations_of_Motion\");
 addpath("..\CollectedSimData\");
@@ -11,8 +14,8 @@ addpath("..\CollectedSimData\");
 loadSim
 
 % Choose which recorded data set to simulate by uncommenting
-% data = D06_10_stabilizing_LQR_disc_R01;
-data = D06_10_stabilizing_MPC_disc_R01;
+data = D06_10_stabilizing_LQR_disc_R01;
+% data = D06_10_stabilizing_MPC_disc_R01;
 data = data.data;
 clearvars -except data
 
@@ -30,9 +33,9 @@ stairs(t, data.pendulum_angle, 'LineWidth', 1.5);
 title('Pendulum Angle');
 ylabel('(rad)');
 grid on;
-yticks(ax_angle, -pi/8:pi/16:pi/8);
+% yticks(ax_angle, -pi/8:pi/16:pi/8);
 ylim([-pi/8,pi/8])
-yticklabels(ax_angle, {'$-\pi/8$', '$-\pi/16$', '$0$', '$\pi/16$', '$\pi/8$'});
+% yticklabels(ax_angle, {'$-\pi/8$', '$-\pi/16$', '$0$', '$\pi/16$', '$\pi/8$'});
 
 ax_vel = nexttile;
 ax_vel.Layout.TileSpan=[1,1];
@@ -57,16 +60,17 @@ grid on;
 ax_input = nexttile;
 ax_input.Layout.TileSpan=[1,1];
 hold on;
+stairs(t, data.control_unsaturated, 'LineWidth', 1.5);
 stairs(t, data.control, 'LineWidth', 1.5);
-% legend("Control input", 'Location', 'northeast');
+legend("unsaturated", "saturated", 'Location', 'northeast');
 title('Control input');
 ylabel('Control input');
-ylim([-1,1])
+ylim([-2,2])
 grid on;
 
 % Link the x-axes of both subplots
 linkaxes([ax_angle, ax_vel, ax_fvel, ax_input], 'x');
-xlim([0,5])
+xlim([0,2])
 xlabel('Time (s)');
 
 % Adjust layout for better appearance

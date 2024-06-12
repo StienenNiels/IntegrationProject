@@ -4,6 +4,9 @@ clc
 set(groot,'defaulttextinterpreter','latex');  
 set(groot, 'defaultAxesTickLabelInterpreter','latex');  
 set(groot, 'defaultLegendInterpreter','latex');
+set(groot, 'defaultAxesFontSize', 11); % Set default font size for axes
+set(groot, 'defaultTextFontSize', 11); % Set default font size for text
+set(groot, 'defaultLegendFontSize', 11); % Set default font size for legends
 
 addpath("..\Equations_of_Motion\");
 addpath("..\CollectedSimData\");
@@ -11,11 +14,14 @@ addpath("..\CollectedSimData\");
 loadSim
 
 % Choose which recorded data set to simulate by uncommenting
-data = D06_10_swingup_LQR_stop_R02;
-% data = D06_10_swingup_MPC_disc_stop_R02;
+% data = D06_10_swingup_LQR_stop_R02;
+data = D06_10_swingup_MPC_disc_stop_R02;
 data = data.data;
 clearvars -except data
 
+n = 21; % Number of wraps
+% n=1 for LQR
+% n=21 for MPC
 t = data.time;
 
 figure(1), clf;
@@ -26,24 +32,24 @@ tiledlayout(3, 1);
 ax_angle = nexttile;
 ax_angle.Layout.TileSpan=[1,1];
 hold on;
-stairs(t, data.pendulum_angle, 'LineWidth', 1.5);
-legend("Pendulum angle", 'Location', 'southeast');
+stairs(t, data.pendulum_angle_unwrapped-n*pi, 'LineWidth', 1.5);
+% legend("Pendulum angle", 'Location', 'southeast');
 title('Pendulum Angle');
 ylabel('Pendulum Angle (rad)');
 grid on;
-yticks(ax_angle, -pi:pi/2:pi);
-ylim([-pi,pi])
-yticklabels(ax_angle, {'$-\pi$', '$-\pi/2$', '$0$', '$\pi/2$', '$\pi$'});
+yticks(ax_angle, 0:pi/2:2*pi);
+yticklabels(ax_angle, {'$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$'});
+ylim([-pi/4,2*pi+pi/4])
 
 ax_input = nexttile;
 ax_input.Layout.TileSpan=[1,1];
 hold on;
 stairs(t, data.control_unsaturated, 'LineWidth', 1.5);
 stairs(t, data.control, 'LineWidth', 1.5);
-legend("Control input (unsaturated)", "Control input", 'Location', 'southeast');
+legend("unsaturated", "saturated", 'Location', 'northeast');
 title('Control input');
 ylabel('Control input');
-ylim([-1,1])
+ylim([-2,2])
 grid on;
 
 % Bottom plot: Hybrid state
