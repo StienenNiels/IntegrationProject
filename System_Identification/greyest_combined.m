@@ -4,12 +4,24 @@ loadSim
 y_init = D05_08_h05_Ef_Asbc_R01.data(1,2);
 y = D05_08_h05_Ef_Asbc_R01.data(2:end,2:3);
 u = D05_08_h05_Ef_Asbc_R01.data(2:end,5);
+
+% data = D06_10_training_data;
+% data = data.data;
+% z = iddata([data.pendulum_angle_unwrapped, data.flywheel_velocity], data.control, data.sampling_time, 'Name', 'Motor');
+
 z = iddata(y, u, 0.05, 'Name', 'Motor');
 z.OutputName = {'Pendulum angle' 'Flywheel angular velocity'};
 z.OutputUnit = {'rad' 'rad/s'};
 z.InputName = {'Control Signal'};
 z.Tstart = 0;
 z.TimeUnit = 's';
+
+% val = iddata([data.pendulum_angle, data.flywheel_velocity], data.control, 0.01, 'Name', 'Motor');
+% val.OutputName = {'Pendulum angle' 'Flywheel angular velocity'};
+% val.OutputUnit = {'rad' 'rad/s'};
+% val.InputName = {'Control Signal'};
+% val.Tstart = 0;
+% val.TimeUnit = 's';
 
 FileName      = 'combined';        % File describing the model structure.
 Order         = [2 1 3];             % Model orders [ny nu nx].
@@ -74,4 +86,21 @@ for i = 1:1
         compareOptions('InitialCondition', 'model'));
     grid on
 end
+
+%% Validation 
+% loadSim;
+data = D06_10_chirp_07_h05;
+data = data.data;
+
+val = iddata([data.pendulum_angle_unwrapped, data.flywheel_velocity], data.control, data.sampling_time, 'Name', 'Motor');
+val.OutputName = {'Pendulum angle' 'Flywheel angular velocity'};
+val.OutputUnit = {'rad' 'rad/s'};
+val.InputName = {'Control Signal'};
+val.Tstart = 0;
+val.TimeUnit = 's';
+
+figure();
+compare(val, nlgrrk45, 1, ...
+   compareOptions('InitialCondition', 'model'));
+grid on
 
