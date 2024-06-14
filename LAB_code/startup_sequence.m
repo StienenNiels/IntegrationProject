@@ -5,9 +5,9 @@ addpath("LAB_functions\")
 
 % Linearization point (unstable equilibrium, top position)
 linearization_point = [pi;0;0];
-% initial_state = [0;0;0];
+initial_state = [0;0;0];
 % Deviation for in model simulation
-lp_deviation = [deg2rad((rand()-0.5)*5);0;0]; % 20 degrees from equilibrium
+lp_deviation = [deg2rad((rand()-0.5)*5-180);0;0]; % 20 degrees from equilibrium
 % Continuous or discrete observer and LQR gains
 observer_continuous = true;
 model_continuous = false;

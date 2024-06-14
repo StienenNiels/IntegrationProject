@@ -22,11 +22,11 @@ R = wu1*qu1;
 if model_continuous
     x0 = [0;0;0];
     [A_LQR,B_LQR,C_LQR,Q_LQR,R_LQR,M_LQR,P_LQR,x0] = rate_change_pen(sys.A,sys.B,Q,R,L_LQR,x0);
-    K_LQR = lqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR)
+    K_LQR = lqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR);
 else
     x0 = [0;0;0];
     [A_LQR,B_LQR,C_LQR,Q_LQR,R_LQR,M_LQR,P_LQR,x0] = rate_change_pen(sys.A,sys.B,Q,R,L_LQR,x0);
     % K_LQR = dlqr(sys.A,sys.B,Q,R);
-    K_LQR = dlqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR)
+    K_LQR = dlqr(A_LQR,B_LQR,Q_LQR,R_LQR,M_LQR);
 end
 
